@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng của bạn</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .container { max-width: 600px; margin: auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .message { padding: 10px; background-color: #e1f5fe; border-left: 5px solid #03a9f4; margin-bottom: 20px; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 8px; border-bottom: 1px solid #eee; }
+        .back-link { display: inline-block; margin-top: 20px; color: #3498db; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Thông tin thanh toán</h2>
+
+    <div class="message">
+        <p th:text="${message}"></p>
+    </div>
+
+    <div th:if="${session.myCart != null and !session.myCart.isEmpty()}">
+        <h3>Các sản phẩm đã chọn:</h3>
+        <ul>
+            <li th:each="item : ${session.myCart}">
+                Mã sản phẩm: <span th:text="${item}"></span>
+            </li>
+        </ul>
+    </div>
+
+    <a href="index.jsp" class="back-link">← Tiếp tục mua hàng</a>
+</div>
+
+</body>
+</html>

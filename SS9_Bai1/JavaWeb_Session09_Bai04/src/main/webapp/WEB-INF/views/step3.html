@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Bước 3 - Xác nhận</title></head>
+<body>
+<h2>Bước 3: Xác nhận thông tin</h2>
+<div th:object="${shopData}">
+    <p><strong>Họ tên:</strong> <span th:text="*{fullname}"></span></p>
+    <p><strong>Email:</strong> <span th:text="*{email}"></span></p>
+    <p><strong>Tên Shop:</strong> <span th:text="*{shopName}"></span></p>
+    <p><strong>Địa chỉ:</strong> <span th:text="*{shopAddress}"></span></p>
+</div>
+
+<form th:action="@{/register/finish}" method="post">
+    <button type="button" onclick="history.back()">Quay lại</button>
+    <button type="submit">HOÀN TẤT & ĐĂNG KÝ</button>
+</form>
+</body>
+</html>

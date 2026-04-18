@@ -1,0 +1,31 @@
+# BÁO CÁO PHÂN TÍCH GIẢI PHÁP WIZARD FORM - RIKKEIMALL
+
+## I. Phân tích & Đề xuất giải pháp
+
+Để duy trì dữ liệu xuyên suốt 3 trang HTML mà không bị mất thông tin, chúng ta có 2 phương án:
+
+### 1. Giải pháp 1: HTML Hidden Input
+* **Cơ chế:** Dữ liệu từ bước trước được Server gửi ngược lại trình duyệt và ẩn trong các thẻ `<input type="hidden">`. Khi bấm "Tiếp", trình duyệt gửi cả dữ liệu cũ và mới lên Server.
+* **Tính chất:** Stateless (Server không lưu trữ trạng thái).
+
+### 2. Giải pháp 2: Spring @SessionAttributes
+* **Cơ chế:** Server sử dụng một vùng nhớ (Session) để giữ đối tượng dữ liệu. Mỗi bước chỉ cần gửi dữ liệu mới lên, Server sẽ tự cập nhật vào đối tượng đang giữ.
+* **Tính chất:** Stateful (Server ghi nhớ trạng thái).
+
+---
+
+## II. So sánh & Lựa chọn giải pháp
+
+| Tiêu chí | Giải pháp 1: Hidden Input | Giải pháp 2: @SessionAttributes |
+| :--- | :--- | :--- |
+| **Vị trí lưu trữ** | Máy khách (Client-side) | Máy chủ (Server-side) |
+| **Bảo mật** | **Kém.** Khách có thể F12 sửa dữ liệu ẩn. | **Cao.** Dữ liệu nằm ở RAM Server, khách không thể sửa. |
+| **Băng thông** | **Tốn.** Request gửi đi gửi lại 50 trường. | **Tối ưu.** Chỉ gửi dữ liệu của bước hiện tại. |
+| **Độ phức tạp** | **Cao.** Phải map thủ công từng trường ẩn. | **Thấp.** Spring tự động quản lý đối tượng. |
+| **Rủi ro RAM** | **Không.** | **Có.** Cần dọn dẹp để tránh tràn RAM. |
+
+### KẾT LUẬN & LỰA CHỌN
+**Lựa chọn: Giải pháp 2 (@SessionAttributes)**
+
+* **Lý do:** Đảm bảo an toàn dữ liệu kinh doanh (tránh F12) và giúp mã nguồn sạch sẽ, dễ bảo trì hơn đối với form lớn (50 trường).
+* **Xử lý rủi ro:** Sử dụng `SessionStatus.setComplete()` ở bước cuối cùng để giải phóng RAM ngay lập tức.

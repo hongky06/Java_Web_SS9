@@ -1,0 +1,8 @@
+1. Xác định công cụ: Chọn Cookie hay Session?
+Công cụ chọn: Cookie.
+Tại sao không chọn Session? * Session (Phiên làm việc) thường được lưu trữ trên bộ nhớ RAM của Server và sẽ bị xóa ngay khi người dùng đóng trình duyệt hoặc hết hạn (thường là 30 phút). Điều này không đáp ứng được yêu cầu "nhớ thiết lập ít nhất 30 ngày kể cả khi tắt máy".
+Cookie được lưu trữ trực tiếp trên ổ cứng máy tính của người dùng (Client-side). Nó cho phép chúng ta thiết lập thời gian hết hạn cụ thể (Max-Age), giúp dữ liệu tồn tại bền bỉ qua nhiều lần khởi động lại máy.
+2. Giải pháp chặn bẫy dữ liệu XSS
+Để ngăn chặn Hacker sử dụng mã độc JavaScript (document.cookie) để đánh cắp hoặc sửa đổi Cookie, chúng ta cần sử dụng cờ HttpOnly.
+Khi cờ HttpOnly được bật, trình duyệt sẽ ngăn cấm mọi đoạn mã JavaScript truy cập vào Cookie đó.
+Cookie chỉ được gửi đi thông qua các Header của yêu cầu HTTP(S), giúp bảo vệ dữ liệu cấu hình hệ thống khỏi các cuộc tấn công XSS.

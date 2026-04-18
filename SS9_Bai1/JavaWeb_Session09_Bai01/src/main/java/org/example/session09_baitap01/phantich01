@@ -1,0 +1,6 @@
+Vấn đề nằm ở việc sử dụng HttpServletRequest (Request Scope) để lưu trữ dữ liệu cần tồn tại qua nhiều trang.
+Cơ chế của Request Scope: Một HttpServletRequest chỉ tồn tại trong vòng đời của một yêu cầu HTTP duy nhất. Khi phản hồi (Response) được gửi về trình duyệt, đối tượng Request đó sẽ bị hủy bỏ ngay lập tức.
+Lỗi do lệnh redirect: * Khi bạn dùng return "redirect:/checkout", server sẽ gửi mã phản hồi 302 về trình duyệt, yêu cầu trình duyệt thực hiện một yêu cầu mới hoàn toàn đến địa chỉ /checkout.
+Yêu cầu mới này sẽ tạo ra một đối tượng HttpServletRequest mới, hoàn toàn trống rỗng.
+Do đó, lệnh request.getAttribute("myCart") ở phương thức viewCheckout sẽ luôn trả về null.
+Kết luận: Lỗi do chọn sai phạm vi lưu trữ (Scope). Giỏ hàng cần tồn tại xuyên suốt nhiều Request, vì vậy Request Scope không đáp ứng được.

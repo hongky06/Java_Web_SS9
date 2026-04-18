@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Bước 2 - Gian hàng</title></head>
+<body>
+<h2>Bước 2: Thông tin Gian hàng</h2>
+<form th:action="@{/register/step3}" th:object="${shopData}" method="post">
+    Tên Shop: <input type="text" th:field="*{shopName}" required><br>
+    Địa chỉ: <input type="text" th:field="*{shopAddress}" required><br>
+    <button type="submit">Tiếp theo (Bước 3)</button>
+</form>
+</body>
+</html>

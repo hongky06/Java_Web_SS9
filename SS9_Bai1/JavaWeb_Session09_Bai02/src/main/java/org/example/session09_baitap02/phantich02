@@ -1,0 +1,5 @@
+Tại sao đoạn check if (guestName == null) lại vô dụng?
+Cơ chế Validation của Spring: Theo mặc định, annotation @CookieValue có thuộc tính required = true.
+Chặn từ "vòng gửi xe": Khi khách hàng mới truy cập (chưa có cookie guest_name), Spring MVC sẽ kiểm tra các tham số đầu vào trước khi thực thi hàm homePage. Vì không tìm thấy cookie bắt buộc
+, Spring lập tức ném ra ngoại lệ MissingRequestCookieException và trả về lỗi 400 Bad Request cho trình duyệt.
+Kết quả: Luồng xử lý bị ngắt ngay lập tức. Các dòng lệnh từ số 3 đến số 7 trong hàm của bạn chưa bao giờ được chạy tới. Việc kiểm tra null ở đây giống như việc bạn kiểm tra vé của một người khách thậm chí còn không được bảo vệ cho bước chân qua cửa.

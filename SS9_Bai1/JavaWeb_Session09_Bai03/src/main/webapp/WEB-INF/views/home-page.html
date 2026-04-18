@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>RikkeiMall - Theme Mode</title>
+    <style>
+        .light { background-color: white; color: black; }
+        .dark { background-color: #2c3e50; color: white; }
+        body { transition: 0.5s; padding: 50px; text-align: center; }
+    </style>
+</head>
+<body th:class="${theme}">
+
+<h1 th:text="'Chế độ hiện tại: ' + ${theme}"></h1>
+
+<form action="/change-theme" method="post">
+    <button name="theme" value="light" type="submit">Giao diện Sáng</button>
+    <button name="theme" value="dark" type="submit">Giao diện Tối</button>
+</form>
+
+</body>
+</html>

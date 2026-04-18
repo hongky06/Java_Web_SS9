@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Bước 1 - Cá nhân</title></head>
+<body>
+<h2>Bước 1: Thông tin cá nhân</h2>
+<form th:action="@{/register/step2}" th:object="${shopData}" method="post">
+    Họ tên: <input type="text" th:field="*{fullname}" required><br>
+    Email: <input type="email" th:field="*{email}" required><br>
+    <button type="submit">Tiếp theo (Bước 2)</button>
+</form>
+</body>
+</html>
